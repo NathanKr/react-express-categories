@@ -27,8 +27,8 @@ class Categories extends Component {
       return <Redirect to="/ProductsOfCategory" />;
     }
 
-    const elements = this.state.categories.map(category => (
-      <div
+    const elements = this.state.categories.map((category,index) => (
+      <div key={index}
         onClick={() => {
           this.props.setCategoryName(category.name);
           this.setState({ redirectToCategory: true });
