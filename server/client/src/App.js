@@ -5,10 +5,10 @@ import Home from "./Home";
 import Categories from "./Categories";
 import ProductsOfCategory from "./ProductsOfCategory";
 class App extends Component {
-  state = { category: null };
+  state = { categoryName: null };
 
-  setCategory = category => {
-    this.setState({ category });
+  setCategoryName = categoryName => {
+    this.setState({ categoryName });
   };
 
   render() {
@@ -24,7 +24,7 @@ class App extends Component {
               path="/Categories"
               render={() => (
                 <Categories
-                  setCategory={this.setCategory}
+                setCategoryName={this.setCategoryName}
                 />
               )}
             />
@@ -33,7 +33,7 @@ class App extends Component {
               path="/ProductsOfCategory"
               render={() => (
                 <ProductsOfCategory
-                  productsOfCategory={this.state.productsOfCategory}
+                  categoryName={this.state.categoryName}
                 />
               )}
             />

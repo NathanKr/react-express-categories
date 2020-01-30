@@ -11,7 +11,7 @@ const db_helper = require("./db_helper");
 
 app.get("/categories", (req, res) => db_helper.getCategories(req, res));
 
-app.get("/products/:category", (req, res) =>
+app.get("/products/:categoryName", (req, res) =>
   db_helper.getProductsOfCategory(req, res)
 );
 

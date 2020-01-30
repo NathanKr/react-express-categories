@@ -4,9 +4,10 @@ const dbName = "my_categories";
 const collectionCategories = "categories";
 const collectionProducts = "products";
 
+// category : name , img
 const getCategories = (req, res) => {
   {
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
       if (err) return res.sendStatus(500);
 
       const dbo = db.db(dbName);
@@ -22,16 +23,17 @@ const getCategories = (req, res) => {
   }
 };
 
+// product : name , img , categoryName
 const getProductsOfCategory = (req, res) => {
-  const category = req.params.category;
+  const categoryName = req.params.categoryName;
 
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     if (err) return res.sendStatus(500);
 
     const dbo = db.db(dbName);
     dbo
       .collection(collectionProducts)
-      .find({ category: category })
+      .find({ categoryName })
       .toArray(function(err, productsPerCategory) {
         if (err) return res.sendStatus(500);
 

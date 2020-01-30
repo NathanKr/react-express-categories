@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Categories extends Component {
   // ---- array of name , img
-  state = { categories: [] };
+  state = { categories: [], redirectToCategory: false };
   getCategoriesFromServer = () => {
     axios
       .get("/categories")
@@ -22,8 +23,20 @@ class Categories extends Component {
   }
 
   render() {
+    if (this.state.redirectToCategory) {
+      return <Redirect to="/ProductsOfCategory" />;
+    }
+
     const elements = this.state.categories.map(category => (
-      <p onClick={() => this.props.setCategory(category)}>{category.name}</p>
+      <div
+        onClick={() => {
+          this.props.setCategoryName(category.name);
+          this.setState({ redirectToCategory: true });
+        }}
+      >
+        <h3>{category.name}</h3>
+        <img src={category.img}/>
+      </div>
     ));
     return (
       <div>
